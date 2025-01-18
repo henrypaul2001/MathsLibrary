@@ -16,4 +16,6 @@ int main()
 
     Vec3 dividedBy = Vec3(10.0f, 10.0f, 10.0f) / 2.0f;
     Vec3 normalizedTest2 = Normalize(Vec3(10.0f, 2.433f, 5.6f));
+
+    Vec3 addition = Vec3(10.0f, 5.0f, 1.0f) + Vec3(12.0f, 2.5f, -1.5f);
 }

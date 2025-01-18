@@ -19,6 +19,18 @@ public:
 		s = 1.0f / s;
 		return *this *= s;
 	}
+	Vector3& operator +=(const Vector3& v) {
+		x += v.x;
+		y += v.y;
+		z += v.z;
+		return *this;
+	}
+	Vector3& operator -=(const Vector3& v) {
+		x -= v.x;
+		y -= v.y;
+		z -= v.z;
+		return *this;
+	}
 };
 
 inline Vector3 operator *(const Vector3& v, float s) {
@@ -29,6 +41,12 @@ inline Vector3 operator /(const Vector3& v, float s) {
 }
 inline Vector3 operator -(const Vector3& v) {
 	return v * -1.0f;
+}
+inline Vector3 operator +(const Vector3& a, const Vector3& b) {
+	return Vector3(a.x + b.x, a.y + b.y, a.z + b.z);
+}
+inline Vector3 operator -(const Vector3& a, const Vector3& b) {
+	return Vector3(a.x - b.x, a.y - b.y, a.z - b.z);
 }
 inline float Magnitude(const Vector3& v) {
 	return std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
