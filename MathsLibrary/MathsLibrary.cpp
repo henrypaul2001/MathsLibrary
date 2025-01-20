@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Vector.h"
+#include "Matrix.h"
 int main()
 {
     std::cout << "Hello World!\n";
