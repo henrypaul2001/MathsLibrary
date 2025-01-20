@@ -19,17 +19,16 @@ public:
 		n[2][0] = c.x; n[2][1] = c.y; n[2][2] = c.z;
 	}
 
-	float& operator ()(int i, int j) {
+	float& operator()(int i, int j) {
 		return n[j][i];
 	}
-	const float& operator ()(int i, int j) const {
+	const float& operator()(int i, int j) const {
 		return n[j][i];
 	}
 
 	Vector3& operator [](int j) {
 		return *reinterpret_cast<Vector3*>(n[j]);
 	}
-
 	const Vector3& operator [](int j) const {
 		return *reinterpret_cast<const Vector3*>(n[j]);
 	}
@@ -37,5 +36,25 @@ public:
 private:
 	float n[3][3];
 };
+
+inline Matrix3x3 operator *(const Matrix3x3& a, const Matrix3x3& b) {
+	return Matrix3x3(a(0, 0) * b(0, 0) + a(0, 1) * b(1, 0) + a(0, 2) * b(2, 0),
+					 a(0, 0) * b(0, 1) + a(0, 1) * b(1, 1) + a(0, 2) * b(2, 1),
+					 a(0, 0) * b(0, 2) + a(0, 1) * b(1, 2) + a(0, 2) * b(2, 2), 
+		
+					 a(1, 0) * b(0, 0) + a(1, 1) * b(1, 0) + a(1, 2) * b(2, 0),
+					 a(1, 0) * b(0, 1) + a(1, 1) * b(1, 1) + a(1, 2) * b(2, 1),
+					 a(1, 0) * b(0, 2) + a(1, 1) * b(1, 2) + a(1, 2) * b(2, 2),
+
+					 a(2, 0) * b(0, 0) + a(2, 1) * b(1, 0) + a(2, 2) * b(2, 0),
+					 a(2, 0) * b(0, 1) + a(2, 1) * b(1, 1) + a(2, 2) * b(2, 1),
+					 a(2, 0) * b(0, 2) + a(2, 1) * b(1, 2) + a(2, 2) * b(2, 2));
+}
+
+inline Vector3 operator *(const Matrix3x3& m, const Vector3& v) {
+	return Vector3(m(0, 0) * v.x + m(0, 1) * v.y + m(0, 2) * v.z,
+				   m(1, 0) * v.x + m(1, 1) * v.y + m(1, 2) * v.z,
+				   m(2, 0) * v.x + m(2, 1) * v.y + m(2, 2) * v.z);
+}
 
 using Mat3 = Matrix3x3;
