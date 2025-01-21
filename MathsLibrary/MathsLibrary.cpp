@@ -19,4 +19,6 @@ int main()
     Vec3 normalizedTest2 = Normalize(Vec3(10.0f, 2.433f, 5.6f));
 
     Vec3 addition = Vec3(10.0f, 5.0f, 1.0f) + Vec3(12.0f, 2.5f, -1.5f);
+
+    float dotProduct = Dot(Vec3(1.0f, 2.55f, 10.5), Vec3(0.02f, 1.55f, -10.5f));
 }

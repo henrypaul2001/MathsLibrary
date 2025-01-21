@@ -54,5 +54,8 @@ inline float Magnitude(const Vector3& v) {
 inline Vector3 Normalize(const Vector3& v) {
 	return v / Magnitude(v);
 }
+inline float Dot(const Vector3& a, const Vector3& b) {
+	return a.x * b.x + a.y * b.y + a.z * b.z;
+}
 
 using Vec3 = Vector3;
