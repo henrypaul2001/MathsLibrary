@@ -60,5 +60,17 @@ inline float Dot(const Vector3& a, const Vector3& b) {
 inline Vector3 Cross(const Vector3& a, const Vector3& b) {
 	return Vector3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
 }
+inline Vector3 Project(const Vector3& a, const Vector3& b) {
+	return b * (Dot(a, b) / Dot(b, b));
+}
+inline Vector3 ProjectUnitB(const Vector3& a, const Vector3& unitB) {
+	return unitB * Dot(a, unitB);
+}
+inline Vector3 Reject(const Vector3& a, const Vector3& b) {
+	return a - (b * (Dot(a, b) / Dot(b, b)));
+}
+inline Vector3 RejectUnitB(const Vector3& a, const Vector3& unitB) {
+	return a - (unitB * Dot(a, unitB));
+}
 
 using Vec3 = Vector3;
