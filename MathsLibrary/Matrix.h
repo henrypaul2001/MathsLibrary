@@ -57,4 +57,10 @@ inline Vector3 operator *(const Matrix3x3& m, const Vector3& v) {
 				   m(2, 0) * v.x + m(2, 1) * v.y + m(2, 2) * v.z);
 }
 
+inline float Determinant(const Matrix3x3& m) {
+	return (m(0, 0) * (m(1, 1) * m(2, 2) - m(1, 2) * m(2, 1))
+		  + m(0, 1) * (m(1, 2) * m(2, 0) - m(1, 0) * m(2, 2))
+		  + m(0, 2) * (m(1, 0) * m(2, 1) - m(1, 1) * m(2, 0)));
+}
+
 using Mat3 = Matrix3x3;

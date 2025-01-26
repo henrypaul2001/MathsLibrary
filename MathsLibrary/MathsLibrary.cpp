@@ -22,4 +22,8 @@ int main()
 
     float dotProduct = Dot(Vec3(1.0f, 2.55f, 10.5), Vec3(0.02f, 1.55f, -10.5f));
     Vec3 crossProduct = Cross(Vec3(1.0f, 2.0f, 3.0f), Vec3(3.0f, 4.0f, 5.0f));
+
+    float d = Determinant(Matrix3x3(1.0f, 0.0f, 0.0f,
+                                    0.0f, 1.0f, 0.0f,
+                                    0.0f, 0.0f, 1.0f));
 }
