@@ -26,4 +26,9 @@ int main()
     float d = Determinant(Matrix3x3(1.0f, 0.0f, 0.0f,
                                     0.0f, 1.0f, 0.0f,
                                     0.0f, 0.0f, 1.0f));
+
+    Matrix3x3 original = Matrix3x3(10.0f, 1.0f, 1.0f,
+                                    0.0f, 20.0f, 0.0f,
+                                    1.0f, 1.0f, 50.0f);
+    Matrix3x3 inverseTest = Inverse(original);
 }
