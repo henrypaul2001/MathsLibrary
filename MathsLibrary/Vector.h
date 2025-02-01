@@ -73,4 +73,45 @@ inline Vector3 RejectUnitB(const Vector3& a, const Vector3& unitB) {
 	return a - (unitB * Dot(a, unitB));
 }
 
+class Vector4 {
+public:
+	float x, y, z, w;
+
+	Vector4() = default;
+	Vector4(const float x, const float y, const float z, const float w) : x(x), y(y), z(z), w(w) {}
+
+	float& operator [](int i) { return ((&x)[i]); }
+	const float& operator [](int i) const { return ((&x)[i]); }
+	Vector4& operator *= (float s) {
+		x *= s;
+		y *= s;
+		z *= s;
+		w *= s;
+		return *this;
+	}
+	Vector4& operator /= (float s) {
+		s = 1.0f / s;
+		x *= s;
+		y *= s;
+		z *= s;
+		w *= s;
+		return *this;
+	}
+	Vector4& operator += (const Vector4& v) {
+		x += v.x;
+		y += v.y;
+		z += v.z;
+		w += v.w;
+		return *this;
+	}
+	Vector4& operator -= (const Vector4& v) {
+		x -= v.x;
+		y -= v.y;
+		z -= v.z;
+		w -= v.w;
+		return *this;
+	}
+};
+
 using Vec3 = Vector3;
+using Vec4 = Vector4;
