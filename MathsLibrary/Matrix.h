@@ -145,5 +145,32 @@ Matrix4x4 Inverse(const Matrix4x4& m) {
 					 r3.x, r3.y, r3.z,  Dot(c, s));
 }
 
+Matrix3x3 MakeRotationX(const float t) {
+	float c = cos(t);
+	float s = sin(t);
+
+	return Matrix3x3(1.0f, 0.0f, 0.0f,
+					 0.0f,    c,   -s,
+					 0.0f,    s,    c);
+}
+
+Matrix3x3 MakeRotationY(const float t) {
+	float c = cos(t);
+	float s = sin(t);
+
+	return Matrix3x3(c,    0.0f,    s,
+					 0.0f, 1.0f, 0.0f,
+					 -s,   0.0f,    c);
+}
+
+Matrix3x3 MakeRotatonZ(const float t) {
+	float c = cos(t);
+	float s = sin(t);
+
+	return Matrix3x3(c,      -s, 0.0f,
+					 s,       c, 0.0f,
+					 0.0f, 0.0f, 1.0f);
+}
+
 using Mat3 = Matrix3x3;
 using Mat4 = Matrix4x4;
