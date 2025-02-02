@@ -172,5 +172,23 @@ Matrix3x3 MakeRotatonZ(const float t) {
 					 0.0f, 0.0f, 1.0f);
 }
 
+Matrix3x3 MakeRotation(const float t, const Vector3& a) {
+	float c = cos(t);
+	float s = sin(t);
+	float d = 1.0f - c;
+
+	float x = a.x * d;
+	float y = a.y * d;
+	float z = a.z * d;
+
+	float axay = x * a.y;
+	float axaz = x * a.z;
+	float ayaz = y * a.z;
+
+	return Matrix3x3(c + x * a.x, axay - s * a.z, axaz + s * a.y,
+					 axay + s * a.z, c + y * a.y, ayaz - s * a.x,
+					 axaz - s * a.y, ayaz + s * a.x, c + z * a.z);
+}
+
 using Mat3 = Matrix3x3;
 using Mat4 = Matrix4x4;
