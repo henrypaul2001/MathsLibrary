@@ -113,5 +113,18 @@ public:
 	}
 };
 
+class Point3 : public Vector3 {
+public:
+	Point3() = default;
+	Point3(float a, float b, float c) : Vector3(a, b, c) {}
+};
+
+inline Point3 operator +(const Point3& a, const Vector3& b) {
+	return Point3(a.x + b.x, a.y + b.y, a.z + b.z);
+}
+inline Vector3 operator -(const Point3& a, const Vector3& b) {
+	return Vector3(a.x - b.x, a.y - b.y, a.z - b.z);
+}
+
 using Vec3 = Vector3;
 using Vec4 = Vector4;
