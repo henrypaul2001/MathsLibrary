@@ -203,5 +203,18 @@ Matrix3x3 MakeReflection(const Vector3& a) {
 					 axaz, ayaz, z * a.z + 1.0f);
 }
 
+Matrix3x3 MakeInvolution(const Vector3& a) {
+	float x = a.x * 2.0f;
+	float y = a.y * 2.0f;
+	float z = a.z * 2.0f;
+	float axay = x * a.y;
+	float axaz = x * a.z;
+	float ayaz = y * a.z;
+
+	return Matrix3x3(x * a.x - 1.0f, axay, axaz,
+					 axay, y * a.y - 1.0f, ayaz,
+					 axaz, ayaz, z * a.z - 1.0f);
+}
+
 using Mat3 = Matrix3x3;
 using Mat4 = Matrix4x4;
