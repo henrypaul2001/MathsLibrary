@@ -216,5 +216,11 @@ Matrix3x3 MakeInvolution(const Vector3& a) {
 					 axaz, ayaz, z * a.z - 1.0f);
 }
 
+Matrix3x3 MakeScale(float sx, float sy, float sz) {
+	return Matrix3x3(sx, 0.0f, 0.0f,
+					 0.0f, sy, 0.0f,
+					 0.0f, 0.0f, sz);
+}
+
 using Mat3 = Matrix3x3;
 using Mat4 = Matrix4x4;
