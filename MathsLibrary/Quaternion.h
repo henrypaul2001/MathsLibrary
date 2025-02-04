@@ -27,3 +27,10 @@ Quaternion operator *(const Quaternion& q1, const Quaternion& q2)
 		q1.w * q2.z + q1.x * q2.y - q1.y * q2.x + q1.z * q2.w,
 		q1.w * q2.w - q1.x * q2.x - q1.y * q2.y - q1.z * q2.z);
 }
+
+Vector3 Transform(const Vector3& v, const Quaternion& q) {
+	const Vector3& b = q.GetVectorPart();
+	float b2 = b.x * b.x + b.y * b.y + b.z * b.z;
+
+	return v * (q.w * q.w - b2) + b * (Dot(v, b) * 2.0f) + Cross(b, v) * (q.w * 2.0f);
+}
