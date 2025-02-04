@@ -1,7 +1,7 @@
 #pragma once
 #include "Vector.h"
 #include "Matrix.h"
-
+#include <math.h>
 class Quaternion {
 public:
 	float x, y, z, w;
@@ -32,6 +32,50 @@ public:
 		return Matrix3x3(1.0f - 2.0f * (y2 + z2), 2.0f * (xy - wz), 2.0f * (xz + wy),
 						 2.0f * (xy + wz), 1.0f - 2.0f * (x2 + z2), 2.0f * (yz - wx),
 						 2.0f * (xz - wy), 2.0f * (yz + wx), 1.0f - 2.0f * (x2 + y2));
+	}
+
+	void SetRotationMatrix(const Matrix3x3& m) {
+		float m00 = m(0, 0);
+		float m11 = m(1, 1);
+		float m22 = m(2, 2);
+		float sum = m00 + m11 + m22;
+
+		if (sum > 0.0F)
+		{
+			w = sqrt(sum + 1.0F) * 0.5F;
+			float f = 0.25F / w;
+
+			x = (m(2, 1) - m(1, 2)) * f;
+			y = (m(0, 2) - m(2, 0)) * f;
+			z = (m(1, 0) - m(0, 1)) * f;
+		}
+		else if ((m00 > m11) && (m00 > m22))
+		{
+			x = sqrt(m00 - m11 - m22 + 1.0F) * 0.5F;
+			float f = 0.25F / x;
+
+			y = (m(1, 0) + m(0, 1)) * f;
+			z = (m(0, 2) + m(2, 0)) * f;
+			w = (m(2, 1) - m(1, 2)) * f;
+		}
+		else if (m11 > m22)
+		{
+			y = sqrt(m11 - m00 - m22 + 1.0F) * 0.5F;
+			float f = 0.25F / y;
+
+			x = (m(1, 0) + m(0, 1)) * f;
+			z = (m(2, 1) + m(1, 2)) * f;
+			w = (m(0, 2) - m(2, 0)) * f;
+		}
+		else
+		{
+			z = sqrt(m22 - m00 - m11 + 1.0F) * 0.5F;
+			float f = 0.25F / z;
+
+			x = (m(0, 2) + m(2, 0)) * f;
+			y = (m(2, 1) + m(1, 2)) * f;
+			w = (m(1, 0) - m(0, 1)) * f;
+		}
 	}
 };
 
