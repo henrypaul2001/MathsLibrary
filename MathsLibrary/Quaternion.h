@@ -17,6 +17,22 @@ public:
 	}
 
 	const Vector3& GetVectorPart() const { return reinterpret_cast<const Vector3&>(x); }
+
+	Matrix3x3 GetRotationMatrix() {
+		float x2 = x * x;
+		float y2 = y * y;
+		float z2 = z * z;
+		float xy = x * y;
+		float xz = x * z;
+		float yz = y * z;
+		float wx = w * x;
+		float wy = w * y;
+		float wz = w * z;
+
+		return Matrix3x3(1.0f - 2.0f * (y2 + z2), 2.0f * (xy - wz), 2.0f * (xz + wy),
+						 2.0f * (xy + wz), 1.0f - 2.0f * (x2 + z2), 2.0f * (yz - wx),
+						 2.0f * (xz - wy), 2.0f * (yz + wx), 1.0f - 2.0f * (x2 + y2));
+	}
 };
 
 Quaternion operator *(const Quaternion& q1, const Quaternion& q2)
