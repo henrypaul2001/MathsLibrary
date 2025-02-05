@@ -73,17 +73,6 @@ inline Vector3 RejectUnitB(const Vector3& a, const Vector3& unitB) {
 	return a - (unitB * Dot(a, unitB));
 }
 
-/*
-* Get the distance between point and line
-* @param q = point
-* @param p = line origin
-* @param v = line direction
-*/
-float DistanceToLine(const Point3& q, const Point3& p, const Vector3& v) {
-	Vector3 a = Cross(p - q, v);
-	return sqrt(Dot(a, a) / Dot(v, v));
-}
-
 class Vector4 {
 public:
 	float x, y, z, w;
@@ -135,6 +124,41 @@ inline Point3 operator +(const Point3& a, const Vector3& b) {
 }
 inline Vector3 operator -(const Point3& a, const Vector3& b) {
 	return Vector3(a.x - b.x, a.y - b.y, a.z - b.z);
+}
+
+/*
+* Get the distance between point and line
+* @param q = point
+* @param p = line origin
+* @param v = line direction
+*/
+float DistancePointLine(const Point3& q, const Point3& p, const Vector3& v) {
+	Vector3 a = Cross(p - q, v);
+	return sqrt(Dot(a, a) / Dot(v, v));
+}
+
+float DistanceLineLine(const Point3& p1, const Vector3& v1, const Point3& p2, const Vector3& v2) {
+	Vector3 dp = p2 - p1;
+
+	float v12 = Dot(v1, v1);
+	float v22 = Dot(v2, v2);
+	float v1v2 = Dot(v1, v2);
+
+	float det = v1v2 * v1v2 - v12 * v22;
+	if (fabs(det) > FLT_MIN) {
+		det = 1.0f / det;
+
+		float dpv1 = Dot(dp, v1);
+		float dpv2 = Dot(dp, v2);
+		float t1 = (v1v2 * dpv2 - v22 * dpv1) * det;
+		float t2 = (v12 * dpv2 - v1v2 * dpv1) * det;
+
+		return Magnitude(dp + v2 * t2 - v1 * t1);
+	}
+
+	// The lines are nearly parallel
+	Vector3 a = Cross(dp, v1);
+	return sqrt(Dot(a, a) / v12);
 }
 
 using Vec3 = Vector3;
