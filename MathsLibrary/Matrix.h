@@ -332,7 +332,11 @@ Vector3 operator *(const Transform4x4& H, const Vector3& v)
 		H(1, 0) * v.x + H(1, 1) * v.y + H(1, 2) * v.z,
 		H(2, 0) * v.x + H(2, 1) * v.y + H(2, 2) * v.z);
 }
-
+Vector3 operator *(const Vector3& n, const Transform4x4& h) {
+	return Vector3(n.x * h(0, 0) + n.y * h(1, 0) + n.z * h(2, 0),
+		n.x * h(0, 1) + n.y * h(1, 1) + n.z * h(2, 1),
+		n.x * h(0, 2) + n.y * h(1, 2) + n.z * h(2, 2));
+}
 Point3 operator *(const Transform4x4& H, const Point3& p)
 {
 	return Point3(H(0, 0) * p.x + H(0, 1) * p.y + H(0, 2) * p.z + H(0, 3),
