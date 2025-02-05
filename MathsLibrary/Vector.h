@@ -73,6 +73,17 @@ inline Vector3 RejectUnitB(const Vector3& a, const Vector3& unitB) {
 	return a - (unitB * Dot(a, unitB));
 }
 
+/*
+* Get the distance between point and line
+* @param q = point
+* @param p = line origin
+* @param v = line direction
+*/
+float DistanceToLine(const Point3& q, const Point3& p, const Vector3& v) {
+	Vector3 a = Cross(p - q, v);
+	return sqrt(Dot(a, a) / Dot(v, v));
+}
+
 class Vector4 {
 public:
 	float x, y, z, w;
