@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Vector.h"
 #include "Matrix.h"
+#include "Quaternion.h"
+#include "Plane.h"
 int main()
 {
     std::cout << "Hello World!\n";
