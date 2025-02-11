@@ -122,7 +122,12 @@ public:
 inline Point3 operator +(const Point3& a, const Vector3& b) {
 	return Point3(a.x + b.x, a.y + b.y, a.z + b.z);
 }
-inline Vector3 operator -(const Point3& a, const Vector3& b) {
+inline Point3 operator -(const Point3& a, const Vector3& b)
+{
+	return Point3(a.x - b.x, a.y - b.y, a.z - b.z);
+}
+inline Vector3 operator -(const Point3& a, const Point3& b)
+{
 	return Vector3(a.x - b.x, a.y - b.y, a.z - b.z);
 }
 
@@ -159,6 +164,15 @@ float DistanceLineLine(const Point3& p1, const Vector3& v1, const Point3& p2, co
 	// The lines are nearly parallel
 	Vector3 a = Cross(dp, v1);
 	return sqrt(Dot(a, a) / v12);
+}
+
+bool IntersectLinePlane(const Point3& p, const Vector3& v, const Plane& f, Point3& q) {
+	float fv = Dot(f, v);
+	if (fabs(fv) > FLT_MIN) {
+		q = p - v * (Dot(f, p) / fv);
+		return true;
+	}
+	return false;
 }
 
 using Vec3 = Vector3;
