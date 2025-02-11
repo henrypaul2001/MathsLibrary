@@ -344,5 +344,19 @@ Point3 operator *(const Transform4x4& H, const Point3& p)
 		H(2, 0) * p.x + H(2, 1) * p.y + H(2, 2) * p.z + H(2, 3));
 }
 
+Transform4x4 MakeReflection(const Plane& f) {
+	float x = f.x * -2.0f;
+	float y = f.y * -2.0f;
+	float z = f.z * -2.0f;
+
+	float nxny = x * f.y;
+	float nxnz = x * f.z;
+	float nynz = y * f.z;
+
+	return Transform4x4(x * f.x + 1.0f, nxny, nxnz, x * f.w,
+						nxny, y * f.y + 1.0f, nynz, y * f.w,
+						nxnz, nynz, z * f.z + 1.0f, z * f.w);
+}
+
 using Mat3 = Matrix3x3;
 using Mat4 = Matrix4x4;
