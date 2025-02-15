@@ -358,5 +358,12 @@ Transform4x4 MakeReflection(const Plane& f) {
 						nxnz, nynz, z * f.z + 1.0f, z * f.w);
 }
 
+inline Plane operator *(const Plane& f, const Transform4x4& h) {
+	return Plane(f.x * h(0, 0) + f.y * h(1, 0) + f.z * h(2, 0),
+		f.x * h(0, 1) + f.y * h(1, 1) + f.z * h(2, 1),
+		f.x * h(0, 2) + f.y * h(1, 2) + f.z * h(2, 2),
+		f.x * h(0, 3) + f.y * h(1, 3) + f.z * h(2, 3) + f.w);
+}
+
 using Mat3 = Matrix3x3;
 using Mat4 = Matrix4x4;
