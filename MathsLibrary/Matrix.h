@@ -1,6 +1,6 @@
 #pragma once
 #include "Vector.h"
-
+#include "Plane.h"
 class Matrix3x3 {
 public:
 	Matrix3x3() = default;
