@@ -170,3 +170,15 @@ float DistanceLineLine(const Point3& p1, const Vector3& v1, const Point3& p2, co
 
 using Vec3 = Vector3;
 using Vec4 = Vector4;
+
+class Line {
+public:
+	Vector3 direction;
+	Vector3 moment;
+	
+	Line() = default;
+	Line(float vx, float vy, float vz, float mx, float my, float mz) : direction(vx, vy, vz), moment(mx, my, mz) {}
+	Line(const Vector3& v, const Vector3& m) : direction(v), moment(m) {}
+
+private:
+};
