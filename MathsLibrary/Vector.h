@@ -179,6 +179,4 @@ public:
 	Line() = default;
 	Line(float vx, float vy, float vz, float mx, float my, float mz) : direction(vx, vy, vz), moment(mx, my, mz) {}
 	Line(const Vector3& v, const Vector3& m) : direction(v), moment(m) {}
-
-private:
 };

@@ -278,7 +278,7 @@ public:
 	Vector3& operator [](int j) { return *reinterpret_cast<Vector3*>(n[j]); }
 	const Vector3& operator [](int j) const { return *reinterpret_cast<const Vector3*>(n[j]); }
 
-	const Point3& GetTranslation() { return *reinterpret_cast<const Point3*>(n[3]); }
+	const Point3& GetTranslation() const { return *reinterpret_cast<const Point3*>(n[3]); }
 	void SetTranslation(const Point3& p) {
 		n[3][0] = p.x;
 		n[3][1] = p.y;
@@ -367,3 +367,12 @@ inline Plane operator *(const Plane& f, const Transform4x4& h) {
 
 using Mat3 = Matrix3x3;
 using Mat4 = Matrix4x4;
+
+Line Transform(const Line& line, const Transform4x4& h) {
+	Matrix3x3 adj = Matrix3x3(Cross(h[1], h[2]), Cross(h[2], h[0]), Cross(h[0], h[1]));
+	const Point3& t = h.GetTranslation();
+
+	Vector3 v = h * line.direction;
+	Vector3 m = adj * line.moment + Cross(t, v);
+	return Line(v, m);
+}
